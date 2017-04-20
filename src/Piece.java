@@ -1,0 +1,4 @@
+
+public enum Piece {
+	bPAWN, bKNIGHT, bROOK, bBISHOP, bQUEEN, bKING, wPAWN, wKNIGHT, wROOK, wBISHOP, wQUEEN, wKING, POSSIBLEMOVE;
+}
