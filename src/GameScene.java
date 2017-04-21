@@ -1,4 +1,3 @@
-import AppModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -16,36 +15,63 @@ public class GameScene {
 
 	
 	private static Scene build(){
+		
+		Piece[][] piecePositions = AppModel.getPiecePositions();
+		
 		AppModel.getWindow().setTitle("Chess");
 		GridPane grid = new GridPane();
 	    grid.setHgap(0);
 	    grid.setVgap(0);
 	    
-	    Image whiteRook = new Image("File:media/whiteRook.png");
-	    Button whiteRook1 = new Button(" ");
-	    whiteRook1.setMinHeight(100);
-	    whiteRook1.setMinWidth(100);
-	    whiteRook1.setStyle("-fx-background-color: transparent");
-	    whiteRook1.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					// Gets the level that the button corresponds to
-					System.out.println("button pressed");
-				}
-			});
-	    grid.add(new ImageView(whiteRook), 0, 0 );
-	    
-//	    BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("/media/whiteRook.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-//        Background background = new Background(backgroundImage);
+	    for(int i = 0; i < 8; i++){
+	    	for(int j = 0; j< 8; j++){
+	    		Piece piece = piecePositions[i][j];
+	    		if(piece != null){
+	    			String pieceName = piece.getClass().getSimpleName();
+	    			System.out.print(pieceName);
+	    			String pieceColour = piece.getColour().toString();
+	    			System.out.print(pieceColour);
+	    		
+	    		Image pieceImg = new Image("File:media/" + pieceColour + "/" + pieceName + ".png");
+	    		grid.add(new ImageView(pieceImg), j, i);
+	    		}
+	    		Button btn = new Button();
+	    		btn.setMinHeight(100);
+	    		btn.setMinWidth(100);
+	    		btn.setStyle("-fx-background-color: transparent");
+	    		
+	    		btn.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						// Gets the level that the button corresponds to
+						System.out.println("button pressed");
+					}
+				});
+	    		
+	    		grid.add(btn, j, i);
+	    	
+	    	}
+	    }
+//	    Image whiteRook = new Image("File:media/whiteRook.png");
+//	    Button whiteRook1 = new Button(" ");
+//	    whiteRook1.setMinHeight(100);
+//	    whiteRook1.setMinWidth(100);
+//	    whiteRook1.setStyle("-fx-background-color: transparent");
+//	    whiteRook1.setOnAction(new EventHandler<ActionEvent>() {
+//				@Override
+//				public void handle(ActionEvent event) {
+//					// Gets the level that the button corresponds to
+//					System.out.println("button pressed");
+//				}
+//			});
+//	    grid.add(new ImageView(whiteRook), 0, 0 );
 //
-//        Button button = new Button( "Click me!");
-//        button.setBackground(background);
-        
-	    grid.add(whiteRook1, 0, 0);
-	    
-	    Button whiteKnight1 = new Button("Knight goes here");
-	    
-	    grid.add(whiteKnight1, 1, 0);
+//        
+//	    grid.add(whiteRook1, 0, 0);
+//	    
+//	    Button whiteKnight1 = new Button("Knight goes here");
+//	    
+//	    grid.add(whiteKnight1, 1, 0);
 	    
 	    grid.setBackground(AppModel.getBackground());
 	    return new Scene(grid, AppModel.getWidth(), AppModel.getHeight());

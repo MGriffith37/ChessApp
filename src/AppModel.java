@@ -26,7 +26,7 @@ public class AppModel extends Application {
 	//private static QuizModel _quizModel;
 	private static Background _background;
 	
-	private static Piece[][] boardPieces = new Piece[8][8];
+	private static Piece[][] _boardPieces = new Piece[8][8];
 
 	// Default GUI dimensions
 	private final static int DEFAULT_WIDTH = 800;
@@ -45,30 +45,30 @@ public class AppModel extends Application {
 			setBackground();
 			
 			if (_isFirstTime){
-				boardPieces[0][0] = Piece.wROOK;
-				boardPieces[0][1] = Piece.wKNIGHT;
-				boardPieces[0][2] = Piece.wBISHOP;
-				boardPieces[0][3] = Piece.wKING;
-				boardPieces[0][4] = Piece.wQUEEN;
-				boardPieces[0][5] = Piece.wBISHOP;
-				boardPieces[0][6] = Piece.wKNIGHT;
-				boardPieces[0][7] = Piece.wROOK;
+				_boardPieces[0][0] = new Rook(PieceColour.WHITE, 0, 0);
+				_boardPieces[0][1] = new Knight(PieceColour.WHITE, 0, 1);
+				_boardPieces[0][2] = new Bishop(PieceColour.WHITE, 0, 2);
+				_boardPieces[0][3] = new King(PieceColour.WHITE, 0, 3);
+				_boardPieces[0][4] = new Queen(PieceColour.WHITE, 0, 4);
+				_boardPieces[0][5] = new Bishop(PieceColour.WHITE, 0, 5);
+				_boardPieces[0][6] = new Knight(PieceColour.WHITE, 0, 6);
+				_boardPieces[0][7] = new Rook(PieceColour.WHITE, 0, 7);
 				
 				for(int i = 0; i <8; i++){
-					boardPieces[1][i] = Piece.wPAWN;
+					_boardPieces[1][i] = new Pawn(PieceColour.WHITE, 1, i);
 				}
 				for(int i = 0; i <8; i++){
-					boardPieces[6][i] = Piece.bPAWN;
+					_boardPieces[6][i] = new Pawn(PieceColour.BLACK, 6, i);
 				}
 				
-				boardPieces[7][0] = Piece.bROOK;
-				boardPieces[7][1] = Piece.bKNIGHT;
-				boardPieces[7][2] = Piece.bBISHOP;
-				boardPieces[7][3] = Piece.bQUEEN;
-				boardPieces[7][4] = Piece.bKING;
-				boardPieces[7][5] = Piece.bBISHOP;
-				boardPieces[7][6] = Piece.bKNIGHT;
-				boardPieces[7][7] = Piece.bROOK;
+				_boardPieces[7][0] = new Rook(PieceColour.BLACK, 7, 0);
+				_boardPieces[7][1] = new Knight(PieceColour.BLACK, 7, 1);
+				_boardPieces[7][2] = new Bishop(PieceColour.BLACK, 7, 2);
+				_boardPieces[7][3] = new Queen(PieceColour.BLACK, 7, 3);
+				_boardPieces[7][4] = new King(PieceColour.BLACK, 7, 4);
+				_boardPieces[7][5] = new Bishop(PieceColour.BLACK, 7, 5);
+				_boardPieces[7][6] = new Knight(PieceColour.BLACK, 7, 6);
+				_boardPieces[7][7] = new Rook(PieceColour.BLACK, 7, 7);
 				
 			}
 	}
@@ -117,6 +117,12 @@ public class AppModel extends Application {
 		return _background;
 	}
 
+	/**
+	 * get array of pieces and positions
+	 */
+	public static Piece[][] getPiecePositions(){
+		return _boardPieces;
+	}
 	// Setter
 	// methods-----------------------------------------------------------------------
 
